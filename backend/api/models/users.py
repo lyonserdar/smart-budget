@@ -12,5 +12,7 @@ class User(Base):
     name = Column(String)
     hashed_password = Column(String, nullable=False)
     disabled = Column(Boolean, default=False)
+    pro = Column(Boolean, default=False)
+    super = Column(Boolean, default=False)
 
     items = relationship("Item", back_populates="owner")

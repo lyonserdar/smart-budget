@@ -24,9 +24,11 @@ def create_user(db: Session, user: schemas.UserCreate) -> User:
     db_user = User(
         email=user.email,
         hashed_password=get_password_hash(user.password),
-        username=user.email,
+        username=user.username or user.email,
         name=user.name,
         disabled=False,
+        pro=False,
+        super=False,
     )
     db.add(db_user)
     db.commit()
@@ -34,8 +36,10 @@ def create_user(db: Session, user: schemas.UserCreate) -> User:
     return db_user
 
 
-def authenticate_user(db, email: str, password: str) -> User | None:
-    user = get_user_by_email(db, email=email)
+def authenticate_user(db, username_or_email: str, password: str) -> User | None:
+    user = get_user(db=db, username=username_or_email) or get_user_by_email(
+        db=db, email=username_or_email
+    )
     if not user:
         return None
     if not verify_password(password, user.hashed_password):

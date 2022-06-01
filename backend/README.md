@@ -26,3 +26,14 @@ To run the server:
 ```
 uvicorn api.main:app --reload
 ```
+
+### Alembic
+To create the migration:
+```
+alembic revision --autogenerate -m "Message"
+```
+
+To run the migration:
+```
+alembic upgrade head
+```

@@ -32,3 +32,5 @@ class User(UserBase):
 class UserInDB(User):
     hashed_password: str
     disabled: bool | None = False
+    pro: bool | None = False
+    super: bool | None = False

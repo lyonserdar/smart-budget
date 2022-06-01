@@ -18,7 +18,9 @@ async def login_for_access_token(
     db: Session = Depends(get_db),
 ):
     user = functions.authenticate_user(
-        db, form_data.username, form_data.password
+        db=db,
+        username_or_email=form_data.username,
+        password=form_data.password,
     )
     if not user:
         raise HTTPException(
