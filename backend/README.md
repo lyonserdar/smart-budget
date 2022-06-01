@@ -24,5 +24,5 @@ pip install -r requirements.txt
 
 To run the server:
 ```
-uvicorn main:app --reload
+uvicorn api.main:app --reload
 ```
