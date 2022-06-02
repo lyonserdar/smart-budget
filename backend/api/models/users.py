@@ -16,3 +16,5 @@ class User(Base):
     super = Column(Boolean, default=False)
 
     items = relationship("Item", back_populates="owner")
+    account_types = relationship("AccountType", back_populates="owner")
+    accounts = relationship("Account", back_populates="owner")
