@@ -1,5 +1,5 @@
-from api import models, schemas
-from api.models.items import Item
+from api import schemas
+from api.models import Item
 from sqlalchemy.orm import Session
 
 

@@ -1,4 +1,4 @@
-from api.schemas import Item
+from api.schemas import AccountType, Item
 from pydantic import BaseModel
 
 
@@ -23,6 +23,7 @@ class UserUpdate(UserBase):
 class User(UserBase):
     id: int | None = None
     items: list[Item] = []
+    account_types: list[AccountType] = []
 
     class Config:
         orm_mode = True

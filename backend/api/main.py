@@ -6,7 +6,7 @@ from passlib.context import CryptContext
 from sqlalchemy.orm import Session
 
 from api import database
-from api.routers import auth, items, users
+from api.routers import accounts, auth, items, users
 
 app = FastAPI()
 
@@ -22,6 +22,7 @@ app.add_middleware(
 app.include_router(auth.router)
 app.include_router(users.router)
 app.include_router(items.router)
+app.include_router(accounts.router)
 
 
 @app.get("/")
