@@ -41,3 +41,39 @@ async def get_account_types(
     db: Session = Depends(get_db),
 ):
     return functions.get_user_account_type(db, current_user.id, account_type_id)
+
+
+@router.get("/")
+async def get_accounts(
+    current_user: schemas.User = Depends(get_current_active_user),
+    db: Session = Depends(get_db),
+):
+    return functions.get_user_accounts(db, current_user.id)
+
+
+@router.post("/")
+async def create_account(
+    account: schemas.AccountCreate,
+    current_user: schemas.User = Depends(get_current_active_user),
+    db: Session = Depends(get_db),
+):
+    if not functions.get_user_account_type(
+        db, current_user.id, account.account_type_id
+    ):
+        raise HTTPException(status_code=400, detail="Unknown account type id")
+
+    if functions.get_user_account_by_name(db, current_user.id, account.name):
+        raise HTTPException(
+            status_code=400, detail="Account with same name already exists"
+        )
+
+    return functions.create_account(db, account, current_user.id)
+
+
+@router.get("/{account_id}")
+async def get_account_types(
+    account_id: int,
+    current_user: schemas.User = Depends(get_current_active_user),
+    db: Session = Depends(get_db),
+):
+    return functions.get_user_account(db, current_user.id, account_id)
