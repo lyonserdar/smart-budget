@@ -6,7 +6,7 @@ from sqlalchemy.orm import Session
 from api import functions, schemas, settings
 from api.database import SessionLocal
 
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/access-token")
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/access_token")
 
 
 def get_db():
